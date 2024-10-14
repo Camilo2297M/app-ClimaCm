@@ -8,7 +8,7 @@ Link para ver el resultado: [APLICACION DE CLIMA TRABAJO FINALIZADO](https://apl
 
 Este tutorial te guiará a través del proceso de creación de una aplicación de clima utilizando JavaScript. La aplicación mostrará datos en tiempo real del clima de una ciudad específica utilizando la API de OpenWeatherMap.
 
-## Configuración inicial
+## Configuración inicial.ddede
 
 Antes de comenzar, necesitarás obtener una clave de API de OpenWeatherMap. Sigue estos pasos para obtener tu propia clave de API:
 
