@@ -1,40 +1,50 @@
-let url = `https://api.openweathermap.org/data/2.5/weather`
-let api_key = `d2b53da8b037eef6381b632adc9aee66`
-let ciudad = `boogota`
-let diferenciakev =273.15
+let urlBase = 'https://api.openweathermap.org/data/2.5/weather'
+let api_key = '605507acf87117e111e54a3ab5238541'
+let difKelvin = 273.15
 
 
-
-document.getElementById(`botonBusqueda`).addEventListener(`click`, () => {
-    const ciudad = document.getElementById(`ciudadEntrada`).value
-    if (ciudad) {
-        fetchdatosclima(ciudad)    
+document.getElementById('botonBusqueda').addEventListener('click', () => {
+    const ciudad = document.getElementById('ciudadEntrada').value
+    if(ciudad){
+        fetchDatosClima(ciudad)
     }
 })
-function fetchdatosclima(ciudad){
-fetch(`${url}?q=${ciudad}&appid=${api_key}`)
-.then(data => data.json())
-.then(data => mostrardatosclima(response))
+
+function fetchDatosClima(ciudad){
+    fetch(`${urlBase}?q=${ciudad}&appid=${api_key}`)
+    .then(data => data.json())
+    .then(data => mostrarDatosClima(data))
 }
 
-function mostrardatosclima (data){
-    const divdatosclima = document.getElementById(`datosClima`)
-    divdatosclima.innerHTML=``
+function mostrarDatosClima(data){
+    const divDatosClima = document.getElementById('datosClima')
+    divDatosClima.innerHTML=''
 
-    const ciudadNombre =data.name
-    const ciudadTemperatura =data.temp
-    const ciudadDescripcion =data.weather[0]
+    const ciudadNombre = data.name
+    const paisNombre = data.sys.country
+    const temperatura = data.main.temp
+    const humedad = data.main.humidity
+    const descripcion = data.weather[0].description
+    const icono = data.weather[0].icon
 
-    const ciudadTitulo = document.createElement(`h2`)
-    ciudadTitulo.textContent =ciudadNombre
+    const ciudadTitulo = document.createElement('h2')
+    ciudadTitulo.textContent = `${ciudadNombre}, ${paisNombre}`
 
-    const temperaturaTitulo = document.createElement(`p`)
-    temperaturaTitulo.textContent = ` La temperatura es ${ciudadTemperatura-diferenciakev}°C`
+    const temperaturaInfo = document.createElement('p')
+    temperaturaInfo.textContent = `La temperatura es: ${Math.floor(temperatura-difKelvin)}ºC`
+    
+    const humedadInfo = document.createElement('p')
+    humedadInfo.textContent = `La humedad es: ${humedad}%`
 
-    const descripInf = document.createElement(`p`)
-    descripInf.textContent = `la descripcon meteorologica es ${ciudadDescripcion}`
+    const iconoInfo = document.createElement('img')
+    iconoInfo.src= `https://openweathermap.org/img/wn/${icono}@2x.png`
 
-    divdatosclima.appendChild(ciudadNombre)
-    divdatosclima.appendChild(ciudadTemperatura)
-    divdatosclima.appendChild(ciudadDescripcion)
+    const descripcionInfo = document.createElement('p')
+    descripcionInfo.textContent = `La descripción meteorológica es: ${descripcion}`
+
+    divDatosClima.appendChild(ciudadTitulo)
+    divDatosClima.appendChild(temperaturaInfo)
+    divDatosClima.appendChild(humedadInfo)
+    divDatosClima.appendChild(iconoInfo)
+    divDatosClima.appendChild(descripcionInfo)
 }
