@@ -24,7 +24,7 @@ document.getElementById('botonBusqueda').addEventListener('click', () => {
 function fetchDatosClima(ciudad) {
     //con fetch vamon a invocar a la api, solo que se puso dinamica
     fetch(`${urlBase}?q=${ciudad}&appid=${api_key}`)
-    // then nos traen la respuestad de la consulta
+    // then nos traen la respuestad de la consulta.
         .then(data => data.json())
         .then(data => mostrarDatosClima(data))
 }
